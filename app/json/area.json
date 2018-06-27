@@ -1,0 +1,19 @@
+{
+'status':200
+'data':[
+    {
+    area_id:1,
+    name:'北京',
+    parent_id:0
+    pingyin:'beijing'
+    },
+      {
+        area_id:2,
+        name:'湖北省',
+        pingyin:'beijing'
+        parent_id:0
+    },
+]
+}
+
+

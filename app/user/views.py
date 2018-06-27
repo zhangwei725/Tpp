@@ -50,16 +50,22 @@ def register():
                           body='用户您好!!',
                           html=render_template('activate.html', username=username),
                           sender="18614068889@163.com",
-                          recipients=['18614068889@163.com'])
+                          recipients=[])
             mail.send(msg)
             # tooken
             # 将用户名缓存到redis
-            rds.set('uname', username, ex=10 * 60)
+            rds.set('username', username, ex=10 * 60)
+            # cache.set('key', value, timeout=10 * 60)
         else:
             result.update(msg='必要参数不能为空', status=-1)
     else:
         result.update(msg='错误的请求方式', status=400)
     return jsonify(result)
+
+
+"""
+使用随机生成的字符串 作为激活的参数
+"""
 
 
 # http://xxx/user/activate/?username=666
@@ -79,11 +85,3 @@ def activate_account():
     else:
         result.update(status=-3, msg='激活链接失效,请重新激活')
     return jsonify(result)
-
-
-# 参数
-
-
-@user.route('/1/', methods=['POST', 'GET'])
-def test_send():
-    return '请激活'

@@ -7,7 +7,7 @@
 <body>
 <p>{{ username }}您好:</p>
 <a href="{{ url_for('user.activate_account', _external=True) }}?username={{ username }}">激活</a>
-如果点击激活不成功请复制该链接到浏览器:
+<p>如果点击激活不成功请复制该链接到浏览器:</p>
 {{ url_for('user.activate_account', _external=True) }}
 </body>
 </html>
