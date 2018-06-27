@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <script src="/static/js/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript">
+        let area_url = 'http://127.0.0.1:9000/home/areas/';
+        $(function () {
+            $.get(area_url, function (result) {
+                alert(result)
+            })
+        })
+    </script>
+
+</head>
+<body>
+<div id="city">
+
+</div>
+</body>
+</html>

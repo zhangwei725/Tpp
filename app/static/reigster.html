@@ -1,0 +1,54 @@
+
+<!doctype html>
+<html>
+<head>
+<title>注册</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="http://fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet">
+<link href="css/bootstrap.css" rel="stylesheet" type='text/css' media="all" />
+<link href="css/style.css" rel="stylesheet" type='text/css' media="all" />
+</head>
+<body>
+<h1 class="w3ls">注册</h1>
+	<div class="content-agileits">
+		<form action="#" method="post" data-toggle="validator" role="form">
+			<div class="form-group  w3 w3l">
+				<label for="firstname" class="control-label">用户名</label>
+				<input type="text" class="form-control" id="firstname" placeholder="用户名" data-error="请输入用户名" required>
+				<div class="help-block with-errors"></div>
+			</div>
+			<div class="form-group w3l agileinfo wthree w3-agileits">
+				<label for="inputEmail" class="control-label">邮箱</label>
+				<input type="email" class="form-control" id="inputEmail" placeholder="邮箱" data-error="请输入正确的邮箱地址" required>
+				<div class="help-block with-errors"></div>
+			</div>
+			<div class="form-group agileinfo wthree w3-agileits agile">
+				<label for="Phone" class="control-label">手机号</label>
+				<input type="text" class="form-control" id="Phone" placeholder="请输入手机号" data-error="请输入正确的手机号" required>
+				<div class="help-block with-errors"></div>
+			</div>
+
+			<div class="form-group agileinfo wthree w3-agileits agile">
+				<label for="inputPassword" class="control-label">密码</label>
+				<input type="password" class="form-control" id="inputPassword" placeholder="请输入手机号" data-error="密码最小长度为6位" required>
+				<div class="help-block with-errors"></div>
+			</div>
+
+		    <div class="form-group agileinfo wthree w3-agileits agile">
+				<label for="inputPassword" class="control-label">确认密码</label>
+				<input type="password" class="form-control" id="inputPassword" placeholder="请再次输入密码" data-error="两次输入不一致" required>
+				<div class="help-block with-errors"></div>
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-lg">注册</button>
+			</div>
+		</form>
+    </div>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/validator.min.js"></script>
+</body>
+</html>

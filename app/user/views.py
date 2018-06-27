@@ -1,8 +1,11 @@
+import json
+
 import redis
 from flask import Blueprint, request, jsonify, render_template
 from flask_mail import Message
 
 from app.ext import db, mail, cache
+from app.home.models import Area
 from app.user.models import User
 from app.utils.redis_utils import get_redis
 
@@ -14,6 +17,9 @@ pool = redis.ConnectionPool(host=HOST, port=PORT, db=DB)
 rds = redis.Redis(connection_pool=pool)
 
 user = Blueprint('user', __name__)
+"""
+
+"""
 
 
 @user.route('/login/')
@@ -85,3 +91,21 @@ def activate_account():
     else:
         result.update(status=-3, msg='激活链接失效,请重新激活')
     return jsonify(result)
+
+# @user.route('/add/')
+# def add_json_data():
+#
+#     with open(r'D:\work\PycharmProjects\Tpp\app\json\area.json', 'r', encoding='utf-8') as f:
+#         data = json.load(f)
+#         obj = data.get('returnValue')
+#         for key in keys:
+#             cities = obj.get(key)
+#             for city in cities:
+#                 db.session.add(Area(name=city.get('regionName'),
+#                                     pingyin=city.get('pinYin'),
+#                                     parent_id=city.get('parentId'),
+#                                     area_id=city.get('cityCode'),
+#                                     key=key,
+#                                     ))
+#                 db.session.commit()
+#     return 'success'
