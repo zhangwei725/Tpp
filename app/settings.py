@@ -1,6 +1,8 @@
 import uuid
 
 
+
+
 class Config:
     DEBUG = False
     SECRET_KEY = '123456466'
@@ -30,7 +32,8 @@ class DevelopConfig(Config):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # 发送邮箱配置
     MAIL_SERVER = 'smtp.163.com'
-    # MAIL_PORT = 110
+    # 邮箱端口
+    MAIL_PORT = 25
     MAIL_USERNAME = '18614068889@163.com'
     MAIL_PASSWORD = 'qq123456'
 
