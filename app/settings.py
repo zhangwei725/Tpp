@@ -1,12 +1,7 @@
 import uuid
-
-
-
-
 class Config:
     DEBUG = False
     SECRET_KEY = '123456466'
-
 
 # 生成数据库连接
 def get_db_uri(database: dict):

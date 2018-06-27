@@ -14,7 +14,7 @@ def init_ext(app):
     # 缓存配置初始化
     init_cache_config(app)
     # 初始化redis
-
+# sqlautocode
 
 # 配置数据库orm框架
 db = SQLAlchemy()
@@ -48,3 +48,6 @@ cache = Cache(config={'CACHE_TYPE': 'redis'})
 
 def init_cache_config(app):
     cache.init_app(app)
+
+
+
