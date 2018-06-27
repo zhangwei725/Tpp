@@ -4,15 +4,6 @@ from app.home.models import Area
 from app.utils.json_utils import to_list
 
 home = Blueprint('home', __name__)
-
-# {
-#     status:200
-#     msg:
-#     hots:[],
-#     areas:{'A':[],'B':[]}
-# }
-
-
 '''
 
 '''

@@ -6,19 +6,30 @@
     <link href="/static/css/style.css" rel="stylesheet">
     <link href="/static/css/bootstrap.css" rel="stylesheet">
     <script src="/static/js/jquery-1.10.2.min.js"></script>
-
     <script type="text/javascript">
         let area_url = 'http://127.0.0.1:9000/home/areas/';
         $(function () {
             $.get(area_url, function (result) {
-                alert(result)
+                if (result && result.status === 200) {
+                    let $ul = $('<ul>');
+                    Object.keys(result.ares).forEach(function (key) {
+                        let $li = $('<li>');
+                        $li.append($('<span>').text(key));
+                        for (let obj of  result.ares[key]) {
+                            $li.append($('<a>').text(obj.name)).appendTo($ul)
+                        }
+                    });
+                    $('#city').append($ul)
+                }
             })
         })
     </script>
-
 </head>
 <body>
 <div id="city">
+    <div>
+        <p></p>
+    </div>
 
 </div>
 </body>
