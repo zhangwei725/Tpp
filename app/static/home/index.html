@@ -5,18 +5,18 @@
     <title>首页</title>
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/bootstrap.css" rel="stylesheet">
-    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <style type="text/css">
         .movie_top > span {
-            padding: 10px;
+            padding: 5px;
             font-size: 18px;
             cursor: pointer;
             color: #3e3e3e;
         }
 
-        .movie_top > span:hover,
-        .movie_top > span:focus {
+        .movie_top_hover {
             color: #999999;
+            border-bottom: 2px solid red;
         }
 
         #hot_detail > li {
@@ -46,6 +46,7 @@
         }
 
         .movie_content {
+            background: rgba(0, 0, 0, 0.2);
             padding: 10px;
             position: absolute;
             top: 0;
@@ -55,7 +56,7 @@
 
         .movie_content > span {
             display: block;
-            padding: 5px 0 0 10px;
+            padding: 10px 0 0 10px;
             color: white;
             width: 150px;
             white-space: nowrap;
@@ -71,11 +72,12 @@
         let base_img_url = 'https://img.alicdn.com/bao/uploaded/';
         //jQuery
         $(function () {
-            // load_area_data();
-            // load_movie_data();
-            show_movie_content()
+            load_area_data();
+            load_movie_data();
+            movie_top();
         });
 
+        //加载区域数据
         function load_area_data() {
             $.get(area_url, function (result) {
                 if (result && result.status === 200) {
@@ -92,6 +94,7 @@
             })
         }
 
+        //加载电影相关的数据
         function load_movie_data() {
             $.getJSON(moves_url, function (result) {
                 if (result && result.status === 200) {
@@ -99,28 +102,76 @@
                     //  先显示 所有的影片数
                     $('#hot_move').text('热门影片(' + data.counts[0][1] + ')');
                     $('#show_move').text('即将上映(' + data.counts[1][1] + ')');
+                    //添加热门影片的数据
                     for (let movie of data.hot_movies) {
                         let $li = $('<li>');
                         //    创建img元素
-                        $('<img>').attr('src', base_img_url + movie.backgroundpicture)
-                            .attr('width', '160')
-                            .attr('height', '240')
+                        $('<div>').css('position', ' relative')
+                            .append(
+                                //    添加image元素
+                                $('<img>').attr('src', base_img_url + movie.backgroundpicture)
+                                    .attr('width', '160')
+                                    .attr('height', '240'))
+                            .append(
+                                //添加影片标题还有评分
+                                $('<div>').attr('class', 'movie_title')
+                                //添加标题
+                                    .append($('<span>').text(movie.showname))
+                                    //添加评分
+                                    .append($('<span>').text('8.5'))
+                            )
+                            //将div添加到li
                             .appendTo($li);
+
+                        /**
+                         * 添加电影导演的部分的div
+                         */
+
+                        $('<div>')
+                            .attr('class', 'movie_content')
+                            //添加导演
+                            .append($('<span>').text('导演: ' + movie.director))
+                            .append($('<span>').text('主演: ' + movie.leadingRole))
+                            .append($('<span>').text('类型: ' + movie.type))
+                            .append($('<span>').text('语言: ' + movie.language))
+                            .append($('<span>').text('地区: ' + movie.country))
+                            .append($('<span>').text('片长: ' + movie.duration))
+                            .appendTo($li)
                         $li.appendTo($('#hot_detail'))
                     }
+                    //    添加即将上映
+
                 }
+                //  切换热门和即将上映的事件
+                show_movie_content();
             })
         }
 
         function show_movie_content() {
             $('#hot_detail>li').mouseover(function () {
-                $('.movie_content').show()
+                $(this).find('.movie_content').fadeIn({speed: 500, easing: 'linear'})
             });
-            $('#hot_detail>li').mouseout(function () {
-                $('.movie_content').hide()
+            $('#hot_detail>li').mouseleave(function () {
+                $(this).find('.movie_content').fadeOut({speed: 500, easing: 'linear'})
             })
         }
 
+        function movie_top() {
+            $('.movie_top>span:first').click(function () {
+                $('#hot_detail').show();
+                $('#show_detail').hide();
+                $(this).addClass('movie_top_hover');
+                $('.movie_top>span:last').removeClass('movie_top_hover');
+            });
+
+            $('.movie_top>span:last').click(function () {
+                $('#show_detail').show();
+                $('#hot_detail').hide();
+                $(this).addClass('movie_top_hover');
+                $('.movie_top>span:first').removeClass('movie_top_hover');
+            })
+
+        }
     </script>
 </head>
 <body>
@@ -133,58 +184,11 @@
         <span id="show_move">即将上映</span>
     </div>
     <ul id="hot_detail">
-        <li>
-            <div style="position: relative">
-                <img src='https://img.alicdn.com/bao/uploaded/i1/TB1MocOh67nBKNjSZLeXXbxCFXa_.jpg_160x240.jpg'>
-                <div class="movie_title">
-                    <span>影片的名称</span>
-                    <span>9.0</span>
-                </div>
-            </div>
-            <div class="movie_content">
-                <span>导演：史蒂芬&middot;C&middot;米勒</span>
-                <span>主演：西尔维斯特&middot;史泰龙,黄晓明,戴夫&middot;巴蒂斯塔,杰米&middot;金</span>
-                <span>类型：动作,惊悚</span>
-                <span>地区：美国,中国大陆</span>
-                <span>语言：英语</span>
-                <span>片长：93</span>
-            </div>
-        </li>
-
     </ul>
     <ul id="show_detail">
-    </ul>
 
+    </ul>
 </div>
 
 </body>
 </html>
-
-
-<!--<div class="tab-movie-list">-->
-<!--<div class="movie-card-wrap">-->
-<!--<a href="https://dianying.taobao.com/showDetail.htm?showId=194007&amp;n_s=new&source=current"-->
-<!--class="movie-card">-->
-<!--<div class="movie-card-tag"><i class="t-201"></i></div>-->
-<!--<div class="movie-card-poster">-->
-<!--<img width="160" height="224"-->
-<!--data-src="https://img.alicdn.com/bao/uploaded/i3/TB1VY70niOYBuNjSsD4XXbSkFXa_.jpg_160x240.jpg"-->
-<!--src="https://img.alicdn.com/bao/uploaded/i3/TB1VY70niOYBuNjSsD4XXbSkFXa_.jpg_160x240.jpg">-->
-<!--</div>-->
-<!--<div class="movie-card-name">-->
-<!--<span class="bt-l">侏罗纪世界2</span>-->
-<!--<span class="bt-r">8.5</span>-->
-<!--</div>-->
-<!--<div class="movie-card-info">-->
-<!--<div class="movie-card-mask"></div>-->
-<!--<div class="movie-card-list">-->
-<!--<span>导演：胡安&middot;安东尼奥&middot;巴亚纳</span>-->
-<!--<span>主演：克里斯&middot;帕拉特,布莱丝&middot;达拉斯&middot;霍华德,贾斯提斯&middot;史密斯,拉菲&middot;斯波,托比&middot;琼斯</span>-->
-<!--<span>类型：动作,冒险,科幻</span>-->
-<!--<span>地区：美国</span>-->
-<!--<span>语言：英语</span>-->
-<!--<span>片长：128分钟</span></div>-->
-<!--</div>-->
-<!--</a>-->
-<!--<a href="https://dianying.taobao.com/showDetail.htm?showId=194007&amp;n_s=new" class="movie-card-buy">选座购票</a>-->
-<!--</div>-->
