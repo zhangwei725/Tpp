@@ -33,7 +33,14 @@ password
 email
 is_active 1激活 0未激活 
 '''
+'''
 
+
+
+
+
+
+'''
 
 @user.route('/register/', methods=['POST', 'GET'])
 def register():

@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
-    <link href="/static/css/style.css" rel="stylesheet">
-    <link href="/static/css/bootstrap.css" rel="stylesheet">
-    <script src="/static/js/jquery-1.10.2.min.js"></script>
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <script src="../js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
         let area_url = 'http://127.0.0.1:9000/home/areas/';
+        let moves_url = 'http://127.0.0.1:9000/home/moves/';
+        let base_img_url = 'https://img.alicdn.com/bao/uploaded/';
         $(function () {
+            load_area_data()
+            load_movie_data()
+        });
+
+        function load_area_data() {
             $.get(area_url, function (result) {
                 if (result && result.status === 200) {
                     let $ul = $('<ul>');
@@ -22,15 +29,87 @@
                     $('#city').append($ul)
                 }
             })
-        })
+        }
+
+        function load_movie_data() {
+            $.getJSON(moves_url, function (result) {
+                if (result && result.status === 200) {
+                    data = result.data;
+                    //  先显示 所有的影片数
+                    $('#hot_move').text('热门影片(' + data.counts[0][1] + ')');
+                    $('#show_move').text('即将上映(' + data.counts[1][1] + ')')
+
+                    for (let movie of data.hot_movies) {
+                        let $li = $('<li>');
+                        //    创建img元素
+                        $('<img>').attr('src', base_img_url + movie.backgroundpicture)
+                            .attr('width', '160')
+                            .attr('height', '240')
+                            .appendTo($li);
+                        $li.appendTo($('#hot_detail'))
+                    }
+                }
+            })
+        }
+
     </script>
 </head>
 <body>
 <div id="city">
+</div>
+
+<div id="movie">
     <div>
-        <p></p>
+        <span id="hot_move"></span>
+        <span id="show_move"></span>
     </div>
+    <ul id="hot_detail">
+        <!--<li>-->
+        <!--<p>标题</p>-->
+        <!--<p>选座</p>-->
+        <!--<div>-->
+        <!--<span>导演：史蒂芬&middot;C&middot;米勒</span>-->
+        <!--<span>主演：西尔维斯特&middot;史泰龙,黄晓明,戴夫&middot;巴蒂斯塔,杰米&middot;金</span>-->
+        <!--<span>类型：动作,惊悚</span>-->
+        <!--<span>地区：美国,中国大陆</span>-->
+        <!--<span>语言：英语</span>-->
+        <!--<span>片长：93</span>-->
+        <!--</div>-->
+        <!--</li>-->
+    </ul>
+    <ul id="show_detail">
+    </ul>
 
 </div>
+
 </body>
 </html>
+
+
+<!--<div class="tab-movie-list">-->
+<!--<div class="movie-card-wrap">-->
+<!--<a href="https://dianying.taobao.com/showDetail.htm?showId=194007&amp;n_s=new&source=current"-->
+<!--class="movie-card">-->
+<!--<div class="movie-card-tag"><i class="t-201"></i></div>-->
+<!--<div class="movie-card-poster">-->
+<!--<img width="160" height="224"-->
+<!--data-src="https://img.alicdn.com/bao/uploaded/i3/TB1VY70niOYBuNjSsD4XXbSkFXa_.jpg_160x240.jpg"-->
+<!--src="https://img.alicdn.com/bao/uploaded/i3/TB1VY70niOYBuNjSsD4XXbSkFXa_.jpg_160x240.jpg">-->
+<!--</div>-->
+<!--<div class="movie-card-name">-->
+<!--<span class="bt-l">侏罗纪世界2</span>-->
+<!--<span class="bt-r">8.5</span>-->
+<!--</div>-->
+<!--<div class="movie-card-info">-->
+<!--<div class="movie-card-mask"></div>-->
+<!--<div class="movie-card-list">-->
+<!--<span>导演：胡安&middot;安东尼奥&middot;巴亚纳</span>-->
+<!--<span>主演：克里斯&middot;帕拉特,布莱丝&middot;达拉斯&middot;霍华德,贾斯提斯&middot;史密斯,拉菲&middot;斯波,托比&middot;琼斯</span>-->
+<!--<span>类型：动作,冒险,科幻</span>-->
+<!--<span>地区：美国</span>-->
+<!--<span>语言：英语</span>-->
+<!--<span>片长：128分钟</span></div>-->
+<!--</div>-->
+<!--</a>-->
+<!--<a href="https://dianying.taobao.com/showDetail.htm?showId=194007&amp;n_s=new" class="movie-card-buy">选座购票</a>-->
+<!--</div>-->
