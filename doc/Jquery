@@ -1,0 +1,107 @@
+1>选择器
+1.1>基础选择器
+1.2>后代选择器  子类选择器
+1.3>兄弟选择器  nextALl(当前元素所有的后面的所有指定的兄弟元素)  preALl(当前元素前面的所有的兄弟元素)
+                siblings(当前元素所有的兄弟元素)
+
+1.4>过滤选择器
+1.4.1> :first 获取first()
+1.4.2> :last 获取last()
+1.4.2> :eq(0)等于    :lt小于 :gt
+1.5> 属性过滤器
+选择器[属性='']
+a[title ^='1'] 以什么开头
+a[title $='333'] 以什么结尾
+a[title *='3']  包含
+表单过滤器
+$(':input')  input  select  button
+$(:text) input type=text
+$(':checkbox')
+
+
+
+
+
+
+
+<a title='13333'>
+<a title='223'>
+
+2>文档操作
+创建
+$('<元素>')
+clone(True,True)
+<li>
+    <a></a>
+    <div >
+<li>
+
+添加元素
+
+内部添加
+append() 添加元素到末尾
+appendTo()
+
+prepend()添加到前面
+
+兄弟元素的操作
+$('#1').after($('<div>')) 当前元素之后插入内容
+$('#1').before($('<div>')) 当前元素之后插入内容
+
+<div>
+<div>
+<div id='1'>
+<div>
+
+
+添加
+删除
+remove
+empty() 清空当前元素
+替换
+replaceWith()
+
+3>属性操作
+attr('href')
+attr('src',)
+text()
+val()
+html()
+块级元素
+内联元素
+内联块
+
+样式操作
+css('key',value)
+选择器 盒子模型  浮动 定位
+height()
+width()
+
+4>事件操作
+.on('click',function())
+click()事件
+.submit() form表单专用提交事件
+focus() 焦点事件
+hover() 相当于移入移除事件
+5>ajax
+url 请求地址
+type 请求方式
+data 传递的数据
+success 成功回调
+error 错误的回调
+processData
+contentType
+6>简单的动画操作
+show()
+参数一 速度 slow normal fast
+参数二   动画切换的效果  从左至右  从上至下 swing linear
+参数三  动画执行完成之后的一个回调方法
+hide()
+6.2> toggle()
+fadeIn()
+fadeOut()
+
+
+
+
+

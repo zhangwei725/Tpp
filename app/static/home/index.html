@@ -6,13 +6,74 @@
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/bootstrap.css" rel="stylesheet">
     <script src="../js/jquery-1.10.2.min.js"></script>
+    <style type="text/css">
+        .movie_top > span {
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            color: #3e3e3e;
+        }
+
+        .movie_top > span:hover,
+        .movie_top > span:focus {
+            color: #999999;
+        }
+
+        #hot_detail > li {
+            padding: 10px;
+            position: relative;
+            float: left;
+            width: 18%;
+        }
+
+        #hot_detail img {
+            position: relative;
+            width: 160px;
+            height: 240px;
+        }
+
+        .movie_title {
+            position: absolute;
+            padding: 10px;
+            margin-left: 5px;
+            left: 0;
+            bottom: 0;
+        }
+
+        .movie_title > span {
+            color: white;
+            font-size: 16px;
+        }
+
+        .movie_content {
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            display: none;
+            left: 0;
+        }
+
+        .movie_content > span {
+            display: block;
+            padding: 5px 0 0 10px;
+            color: white;
+            width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 12px;
+        }
+    </style>
+
     <script type="text/javascript">
         let area_url = 'http://127.0.0.1:9000/home/areas/';
         let moves_url = 'http://127.0.0.1:9000/home/moves/';
         let base_img_url = 'https://img.alicdn.com/bao/uploaded/';
+        //jQuery
         $(function () {
-            load_area_data()
-            load_movie_data()
+            // load_area_data();
+            // load_movie_data();
+            show_movie_content()
         });
 
         function load_area_data() {
@@ -37,8 +98,7 @@
                     data = result.data;
                     //  先显示 所有的影片数
                     $('#hot_move').text('热门影片(' + data.counts[0][1] + ')');
-                    $('#show_move').text('即将上映(' + data.counts[1][1] + ')')
-
+                    $('#show_move').text('即将上映(' + data.counts[1][1] + ')');
                     for (let movie of data.hot_movies) {
                         let $li = $('<li>');
                         //    创建img元素
@@ -52,6 +112,15 @@
             })
         }
 
+        function show_movie_content() {
+            $('#hot_detail>li').mouseover(function () {
+                $('.movie_content').show()
+            });
+            $('#hot_detail>li').mouseout(function () {
+                $('.movie_content').hide()
+            })
+        }
+
     </script>
 </head>
 <body>
@@ -59,23 +128,29 @@
 </div>
 
 <div id="movie">
-    <div>
-        <span id="hot_move"></span>
-        <span id="show_move"></span>
+    <div class="movie_top">
+        <span id="hot_move">热门推荐</span>
+        <span id="show_move">即将上映</span>
     </div>
     <ul id="hot_detail">
-        <!--<li>-->
-        <!--<p>标题</p>-->
-        <!--<p>选座</p>-->
-        <!--<div>-->
-        <!--<span>导演：史蒂芬&middot;C&middot;米勒</span>-->
-        <!--<span>主演：西尔维斯特&middot;史泰龙,黄晓明,戴夫&middot;巴蒂斯塔,杰米&middot;金</span>-->
-        <!--<span>类型：动作,惊悚</span>-->
-        <!--<span>地区：美国,中国大陆</span>-->
-        <!--<span>语言：英语</span>-->
-        <!--<span>片长：93</span>-->
-        <!--</div>-->
-        <!--</li>-->
+        <li>
+            <div style="position: relative">
+                <img src='https://img.alicdn.com/bao/uploaded/i1/TB1MocOh67nBKNjSZLeXXbxCFXa_.jpg_160x240.jpg'>
+                <div class="movie_title">
+                    <span>影片的名称</span>
+                    <span>9.0</span>
+                </div>
+            </div>
+            <div class="movie_content">
+                <span>导演：史蒂芬&middot;C&middot;米勒</span>
+                <span>主演：西尔维斯特&middot;史泰龙,黄晓明,戴夫&middot;巴蒂斯塔,杰米&middot;金</span>
+                <span>类型：动作,惊悚</span>
+                <span>地区：美国,中国大陆</span>
+                <span>语言：英语</span>
+                <span>片长：93</span>
+            </div>
+        </li>
+
     </ul>
     <ul id="show_detail">
     </ul>
