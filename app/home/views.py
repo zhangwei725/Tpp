@@ -36,7 +36,6 @@ def movies():
         # 分组查出热门影片和热映的影片数量
         counts = Movie.query.with_entities(Movie.flag, func.count('*')).group_by(Movie.flag).all()
         # cursor = Movie.query.execute('SELECT COUNT(*) FROM movies GROUP BY flag')
-        #
         # 查热门影片的前5部
         hot_movies = Movie.query.filter(Movie.flag == 1).limit(5).all()
         # 查询即将上映的前5部

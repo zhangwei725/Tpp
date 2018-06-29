@@ -2,6 +2,8 @@
 import datetime
 from decimal import Decimal
 
+from app.ext import db
+
 
 class Test:
     def __init__(self):
@@ -22,11 +24,14 @@ def to_dict(object):
             elif isinstance(getattr(object, key), datetime.date):
                 obj[key] = getattr(object, key).strftime('%Y-%m-%d')
             elif isinstance(getattr(object, key), Decimal):
-                obj[key] = str(getattr(object, key))
+                obj[key] = str(getattr(object, key).quantize(Decimal('0.0')))
+            elif isinstance(getattr(object, key), db.Model):
+                to_dict(getattr(object, key))
+            elif isinstance(getattr(object, key), list):
+                to_list(getattr(object, key))
             else:
                 obj[key] = getattr(object, key)
     return obj
-
 
 def to_list(objects):
     objs = []

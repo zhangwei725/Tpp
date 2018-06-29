@@ -1,8 +1,3 @@
-# 洲   --> 国家 --- 省 --- 市 --- 区县 --->
-# 湖北
-# 武汉  黄石
-# 武昌区
-
 # SELECT * FROM area where  parent_id = 0
 import datetime
 
@@ -36,5 +31,3 @@ class Movie(db.Model):
     backgroundpicture = db.Column(db.String(64))
     flag = db.Column(db.Boolean, default=True)
     isdelete = db.Column(db.Boolean, default=False)
-
-
