@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 
+from app.cinema.models import Cinema
 from app.cinema.schema import cinemas_schema
-from app.home.models import Cinema
 from app.utils.json_utils import to_list
 
 cinema_blue = Blueprint('cinema_blue', __name__)
@@ -18,7 +18,10 @@ def cinemas():
         sort = request.values.get('sort', default=0, type=int)
         # 城市的区县
         dist = request.values.get('dist')
+        # 城市
         city = request.values.get('city')
+        # 搜索电影院的名称
+        keyword = request.values.get('keyword')
         if city:
             # 根据城市分页加载数据
             # 返回一个新的query对象
@@ -28,6 +31,9 @@ def cinemas():
             #    选择了区县
             if dist:
                 query = query.filter(Cinema.district == dist)
+            #  影院名称搜索
+            if keyword:
+                query = query.filter(Cinema.name.like('%' + keyword + '%'))
             if sort:
                 # 升序
                 if sort == 1:
@@ -39,7 +45,6 @@ def cinemas():
             result.update(status=200, msg='success', cinemas=to_list(paginate.items))
         else:
             result.update(status=-1, msg='no param city')
-
     except Exception as e:
         result.update(status=404, msg='fail')
     return jsonify(result)

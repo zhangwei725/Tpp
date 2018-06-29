@@ -38,18 +38,3 @@ class Movie(db.Model):
     isdelete = db.Column(db.Boolean, default=False)
 
 
-# 影院
-class Cinema(db.Model):
-    __tablename__ = 'cinemas'
-    mid = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), unique=True, nullable=False, index=True)
-    city = db.Column(db.String(10))
-    district = db.Column(db.String(10))
-    address = db.Column(db.String(64))
-    phone = db.Column(db.String(20))
-    score = db.Column(db.Float(3, 1), default=10.0)
-    hallnum = db.Column(db.Integer)
-    servicecharge = db.Column(db.Float(3, 1), default=1.2)
-    astrict = db.Column(db.Integer)
-    flag = db.Column(db.Boolean, default=True)
-    isdelete = db.Column(db.Boolean, default=False)

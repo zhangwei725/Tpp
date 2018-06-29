@@ -1,5 +1,5 @@
+from app.cinema.models import Cinema
 from app.ext import ma
-from app.home.models import Cinema
 
 
 class CinemaSchema(ma.ModelSchema):
