@@ -1,5 +1,6 @@
 from flask_caching import Cache
 from flask_mail import Mail
+from flask_marshmallow import Marshmallow
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -14,6 +15,9 @@ def init_ext(app):
     # 缓存配置初始化
     init_cache_config(app)
     # 初始化redis
+    init_marshmallow(app)
+
+
 # sqlautocode
 
 # 配置数据库orm框架
@@ -50,4 +54,9 @@ def init_cache_config(app):
     cache.init_app(app)
 
 
+# 模型转化
+ma = Marshmallow()
 
+
+def init_marshmallow(app):
+    ma.init_app(app)

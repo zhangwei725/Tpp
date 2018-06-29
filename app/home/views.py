@@ -41,7 +41,7 @@ def movies():
         hot_movies = Movie.query.filter(Movie.flag == 1).limit(5).all()
         # 查询即将上映的前5部
         show_movies = Movie.query.filter(Movie.flag == 2).limit(5).all()
-        movie.update(counts=counts, hot_movies=to_list(hot_movies), show_movies=to_list(hot_movies))
+        movie.update(counts=counts, hot_movies=to_list(hot_movies), show_movies=to_list(show_movies))
         result.update(status=200, msg='success', data=movie)
     except Exception as e:
         result.update(status=404, msg='fail')
