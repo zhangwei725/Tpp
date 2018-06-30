@@ -46,7 +46,6 @@ def movie():
         result.update(status=404, msg='fail')
     return jsonify(result)
 
-
 """
 必要参数 城市名称  电影的id
 """

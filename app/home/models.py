@@ -31,3 +31,4 @@ class Movie(db.Model):
     backgroundpicture = db.Column(db.String(64))
     flag = db.Column(db.Boolean, default=True)
     isdelete = db.Column(db.Boolean, default=False)
+    # hs = db.relationship('HallSchedule', back_populates='hs')
